@@ -1,0 +1,20 @@
+{
+  "name": "capturing-nothingness",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --require babel-register tests.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "babel": "6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-latest": "6.24.1",
+    "babel-register": "^6.26.0",
+    "chai": "4.2.0",
+    "mocha": "^6.1.4"
+  }
+}
