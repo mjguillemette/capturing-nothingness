@@ -13,8 +13,8 @@ describe('HazyCalculator', () => {
   })
 
   it('ignores undefined and empty string values and continues operation', () => {
-    const calculationSteps = [, , '', 23, '-', , 12]
-    expect(calculate(calculationSteps)).to.equal(11)
+    const calculationSteps = [, , '', 23, '-', , 12, '-', 1, '*', 2]
+    expect(calculate(calculationSteps)).to.equal(20)
   })
 
   it('can perform a complex operation with multiple steps', () => {

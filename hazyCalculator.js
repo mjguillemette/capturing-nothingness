@@ -1,18 +1,20 @@
 function isSkippedValue(value) {
-  return !value
+  return !isNaN(value)
 }
 
 function isNumericValue(value) {
+  // return typeof Number(value) === 'number' || !isNaN(value)
   return !isNaN(value)
 }
 
 function isNothingValue(value) {
-  return value === null
+  return value === null || value === undefined
 }
 
 function isAcceptableValue(value) {
   const operators = ['+', '-', '*', '/']
-  return typeof value === 'Number' || operators.includes(value)
+  return typeof parseInt(value) === 'number' || operators.includes(value) 
+  // return false
 }
 
 function performCalculationStep(firstOperand, operator, secondOperand) {
@@ -25,8 +27,10 @@ function performCalculationStep(firstOperand, operator, secondOperand) {
       return firstOperand * secondOperand
     case '/':
       return firstOperand / secondOperand
+    case undefined:
+      return secondOperand
     default:
-      throw new Error('Invalid input!')
+      throw new Error(`Invalid input! Error caught in performCalculationStep First Operand: ${firstOperand}, Second Operand: ${secondOperand}, Operator: ${operator}`)
   }
 }
 
@@ -34,9 +38,10 @@ export function calculate(calculationSteps) {
   var total
   var operator
 
-  calculationSteps.forEach(nextCalculationStep => {
+  calculationSteps.forEach((nextCalculationStep, i) => {
     if (!isAcceptableValue(nextCalculationStep)) {
-      throw new Error('Invalid input!')
+      throw new Error(`Invalid input! Error caught in isAcceptableValue ${calculationSteps[i]}`)
+      // calculationSteps.splice(i)
     }
 
     if (isNothingValue(total) && isNumericValue(nextCalculationStep)) {
@@ -50,7 +55,7 @@ export function calculate(calculationSteps) {
       operator = null
 
     } else if (!isSkippedValue(nextCalculationStep)) {
-      throw new Error('Invalid input!')
+      throw new Error(`Invalid input! Error caught in calculate Total: ${total}, Operator: ${operator}`)
     }
   })
 
